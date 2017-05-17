@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    <script src="~/Modules/OwnerClient.js">
+    </script>
+
+}
+<body>
+    <div ng-app="ownerApp" ng-controller="ownerCtrl">
+        <form name="ownerForm">
+            <input name="newName" ng-pattern='/^[a-zA-Z а-яА-Я]{3,30}$/' ng-model="ownerName" ng-init="ownerName" placeholder="Enter Pet Owner's Name" required>
+            <span class="error" ng-show="ownerForm.newName.$error.required">
+                Name Required!
+            </span>
+            <span class="error" ng-show="ownerForm.newName.$invalid">
+                Wrong Name!
+            </span>
+
+            <button ng-click="addOwner(ownerName)" ng-show="!ownerForm.newName.$error.required && !ownerForm.newName.$invalid" ng-model="addBtn">Add</button>
+        </form>
+        <h4>Total count : {{totalItems}}</h4>
+
+        <table id="mytable" class="table table-striped">
+            <thead>
+                <tr class="table-head " ng-click="sortBy('Name')">
+                    <span ng-show="sortType === 'Name'" ng-class="{reverse: reverse}"></span>
+                    <th>Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="person in aCandidates | orderBy:sortType:reverse">
+                    <th>
+                        <div ng-click="redirectToOwner(person.Id, person.Name)">{{person.Name}}</div>
+                    </th>
+                    <th>
+                        <button ng-click="onDelete(person.Id)">Delete</button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></uib-pagination>
+
+        @*
+            <p>Status : {{statuscode}}</p>*@
+
+    </div>
+
+</body>

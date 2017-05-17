@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    <script src="~/Modules/PetClient.js">
+    </script>
+
+}
+
+<p><a href="../../Home/Index">Back to all Users</a></p>
+
+<div ng-app="petApp" ng-controller="petCtrl">
+    <h2>{{ownerName}}' pets</h2>
+    <form name="petForm">
+        <input name="newName" ng-pattern='/^[a-zA-Z а-яА-Я]{3,30}$/' ng-model="petName" ng-init="petName" placeholder="Enter Pet  Name" required>
+        <span class="error" ng-show="petForm.newName.$error.required">
+            Name Required!
+        </span>
+        <span class="error" ng-show="petForm.newName.$invalid">
+            Wrong Name!
+        </span>
+
+        <button ng-click="addPet(petName)" ng-show="!petForm.newName.$error.required && !petForm.newName.$invalid" ng-model="addBtn">Add</button>
+    </form>
+    <h4>Total count : {{totalItems}}</h4>
+
+    <table id="mytable" class="table table-striped">
+        <thead>
+            <tr class="table-head " ng-click="sortBy('Name')">
+                <span ng-show="sortType === 'Name'" ng-class="{reverse: reverse}"></span>
+                <th>Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in aCandidates">
+                <th>
+                    <div>{{person.Name}}</div>
+                </th>
+                <th>
+                    <button ng-click="onDelete(person.Id)">Delete</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></uib-pagination>
+
+    @*
+        <p>Status : {{statuscode}}</p>*@
+
+</div>

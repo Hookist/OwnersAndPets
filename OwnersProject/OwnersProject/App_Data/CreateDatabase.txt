@@ -1,0 +1,15 @@
+ if (!System.IO.File.Exists(Server.MapPath("~/App_Data/OwnersAndPets.sqlite")))
+            {
+                using (var con = new SQLiteConnection("Data Source=" + Server.MapPath("~/App_Data/") + "OwnersAndPets.sqlite;Version=3;"))
+                {
+                    con.Open();
+                    string sql = "Create Table Owners (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name CHAR(50) NOT NULL UNIQUE)";
+                    SQLiteCommand command = new SQLiteCommand(sql, con);
+                    command.ExecuteNonQuery();
+                    sql = "Create Table Pets (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name CHAR(50) NOT NULL, OwnerId, " +
+                       "FOREIGN KEY (OwnerId) REFERENCES Owners(Id))";
+                    command = new SQLiteCommand(sql, con);
+                    command.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
