@@ -53,7 +53,7 @@ namespace OwnersProject.Controllers
         // DELETE: api/Owner/5
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, int id)
         {
-            await context.DeleteOwner(id);    
+            await context.DeleteOwner(id);
             return request.CreateResponse(HttpStatusCode.OK, "Deleted");
         }
     }

@@ -9,7 +9,5 @@ namespace OwnersProject.Models
         public int Id { get; set; }
         [MaxLength(30), MinLength(3), Required]
         public string Name { get; set; }
-
-
     }
 }

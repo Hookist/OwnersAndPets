@@ -48,7 +48,6 @@ app.controller("ownerCtrl", ['$scope', '$http', function ($scope, $http) {
 
         },
             function (responce) {
-                $scope.statuscode = "sd";
                 // failure call back
             });
     }

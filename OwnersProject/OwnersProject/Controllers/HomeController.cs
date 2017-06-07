@@ -13,7 +13,6 @@ namespace OwnersProject.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "First Page";
-
             return View();
         }
     }

@@ -34,7 +34,6 @@ namespace OwnersProject.Controllers
             return request.CreateResponse(HttpStatusCode.OK, pet);
         }
 
-
         //GET: api/Pet/GetPetsByOwner/5
         [ResponseType(typeof(IEnumerable<Pet>))]
         public async Task<HttpResponseMessage> GetPetsByOwner(HttpRequestMessage request, int id)
@@ -45,7 +44,7 @@ namespace OwnersProject.Controllers
 
         // POST: api/Pet
         public async Task<HttpResponseMessage> Post(HttpRequestMessage request, [FromBody]Pet value)
-        {  
+        {
             await context.InsertPet(value);
             return request.CreateResponse(HttpStatusCode.OK, "Iserted");
         }
@@ -58,10 +57,9 @@ namespace OwnersProject.Controllers
         }
 
         // DELETE: api/Pet/5
-        public async  Task<HttpResponseMessage> Delete(HttpRequestMessage request, int id)
+        public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, int id)
         {
             await context.DeletePet(id);
-
             return request.CreateResponse(HttpStatusCode.OK, "Deleted");
         }
     }

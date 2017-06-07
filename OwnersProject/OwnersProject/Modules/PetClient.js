@@ -54,8 +54,6 @@ app.controller("petCtrl", ['$scope', '$http', function ($scope, $http) {
             // success callback
             $scope.statuscode = "Deleted";
             window.location = "http://localhost:16547/SecondPage/Details/" + angular.copy($scope.urlId) + "?name=" + angular.copy($scope.ownerName);
-            //$route.reload();
-
         },
             function (responce) {
                 $scope.statuscode = "sd";

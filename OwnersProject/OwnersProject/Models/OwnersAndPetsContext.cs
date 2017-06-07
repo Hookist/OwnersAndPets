@@ -16,9 +16,9 @@ namespace OwnersProject.Models
         {
             this.connectionString = ConfigurationManager.ConnectionStrings["DBContext"].ConnectionString;
         }
-        public OwnersAndPetsContext(string connectionString) 
+        public OwnersAndPetsContext(string connectionString)
         {
-            this.connectionString = connectionString; 
+            this.connectionString = connectionString;
         }
 
         public async Task<List<Owner>> SelectOwners()
@@ -27,11 +27,9 @@ namespace OwnersProject.Models
             using (var dbConnection = new SQLiteConnection(connectionString))
             {
                 dbConnection.Open();
-
                 string sql = "SELECT * FROM Owners";
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 var reader = await command.ExecuteReaderAsync();
-                //Thread.Sleep(3000);
                 while (reader.Read())
                     owners.Add(new Owner() { Id = Convert.ToInt32(reader["Id"]), Name = reader["Name"].ToString() });
 
@@ -40,7 +38,7 @@ namespace OwnersProject.Models
             return owners;
         }
 
-        
+
         public async Task<Owner> SelectOwner(int Id)
         {
             Owner owner = new Owner();
@@ -92,7 +90,7 @@ namespace OwnersProject.Models
 
         public async Task DeleteOwner(int id)
         {
-        
+
             using (var dbConnection = new SQLiteConnection(connectionString))
             {
                 dbConnection.Open();
@@ -107,12 +105,8 @@ namespace OwnersProject.Models
 
                 dbConnection.Close();
             }
-           
+
         }
-
-
-      
-
 
         public async Task<List<Pet>> SelectPets()
         {
@@ -214,9 +208,5 @@ namespace OwnersProject.Models
                 dbConnection.Close();
             }
         }
-
-
-
-
     }
 }
